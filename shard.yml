@@ -1,0 +1,9 @@
+name: jbuilder
+version: 0.1.0
+
+authors:
+  - shootingfly <rocky13670250811@gmail.com>
+
+crystal: 0.30.1
+
+license: MIT
