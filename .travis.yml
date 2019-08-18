@@ -3,4 +3,12 @@ language: crystal
 # Uncomment the following if you'd like Travis to run specs and check code formatting
 script:
   - crystal spec
-  - crystal tool format --check
+  - crystal docs
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  project_name: jbuilder
+  on:
+    branch: master
+  local_dir: docs

@@ -1,4 +1,5 @@
 # Jbuilder
+[![GitHub release](https://img.shields.io/github/release/shootingfly/jbuilder.svg)](https://github.com/shootingfly/jbuilder/releases)
 
 Generate JSON objects with a Builder-style DSL, inspired by jbuilder (<https://github.com/rails/jbuilder>)
 
