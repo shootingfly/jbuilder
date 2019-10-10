@@ -142,7 +142,7 @@ describe Jbuilder do
   end
 
   it "works with Hash" do
-    current_time = Time.now
+    current_time = Time.local
     user = UserCase.new(
       id: Int64::MAX,
       nick_name: "Jbuilder",
