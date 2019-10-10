@@ -81,6 +81,16 @@ Then you can see,
 }
 ```
 
+## An exmaple for Kemal
+https://github.com/shootingfly/kemal-jbuilder-example
+
+## Changelog
++ **v0.2.0**
+  + Support Kilt
+  + Support Crystal 0.31.1
++ **v0.1.0**
+  + First Release
+
 ## Contributing
 
 1. Fork it (<https://github.com/shootingfly/jbuilder/fork>)

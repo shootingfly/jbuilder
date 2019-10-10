@@ -1,9 +1,9 @@
 name: jbuilder
-version: 0.1.0
+version: 0.2.0
 
 authors:
   - shootingfly
 
-crystal: 0.30.1
+crystal: 0.31.1
 
 license: MIT
