@@ -1,5 +1,6 @@
 require "json"
 require "./jbuilder/version"
+require "./jbuilder/embed"
 
 class Jbuilder
   alias Integer = Int8 | Int16 | Int32 | Int64 | Int128 | UInt8 | UInt16 | UInt32 | UInt64 | UInt128
