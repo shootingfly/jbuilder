@@ -81,7 +81,7 @@ Then you can see,
 }
 ```
 
-## An exmaple for Kemal
+## An example using Kemal
 https://github.com/shootingfly/kemal-jbuilder-example
 
 ## Changelog
