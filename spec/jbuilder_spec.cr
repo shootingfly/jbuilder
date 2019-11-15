@@ -141,6 +141,15 @@ describe Jbuilder do
     }.to_json)
   end
 
+  it "works with Tuple" do
+    jbuilder = Jbuilder.new do |json|
+      json.array! "turple", {7, 7.2, "Version"}
+    end
+    jbuilder.to_json.should eq({
+      "turple" => [7, 7.2, "Version"],
+    }.to_json)
+  end
+
   it "works with Hash" do
     current_time = Time.local
     user = UserCase.new(
@@ -173,6 +182,15 @@ describe Jbuilder do
         created_at: current_time,
         hobbits:    user.hobbits,
       },
+    }.to_json)
+  end
+
+  it "works with NamedTuple" do
+    jbuilder = Jbuilder.new do |json|
+      json.named_turple({nick_name: "Rocky", gender: 1})
+    end
+    jbuilder.to_json.should eq({
+      "named_turple" => {nick_name: "Rocky", gender: 1},
     }.to_json)
   end
 end

@@ -17,6 +17,8 @@ class Jbuilder
   end
 
   macro method_missing(call)
+    {% raise "Values only allowed Array | Tuple | Hash | NamedTuple | #{BasicType}" if call.name.stringify.ends_with?("!") %} 
+
     {% if call.block %}
       set!({{call.name.stringify}}, Jbuilder.new {{call.block}})
     {% else %}
@@ -24,7 +26,7 @@ class Jbuilder
     {% end %}
   end
 
-  def array!(key : String, array : Array)
+  def array!(key : String, array)
     value = [] of BasicObject
     array.each do |item|
       value << item
@@ -32,7 +34,7 @@ class Jbuilder
     @result[key] = value
   end
 
-  def array!(key : String, array : Array)
+  def array!(key : String, array)
     value = [] of BasicObject
     array.each do |item|
       value << Jbuilder.new do |json|
@@ -42,10 +44,10 @@ class Jbuilder
     @result[key] = value
   end
 
-  def hash!(key : String, hash : Hash)
+  def hash!(key : String, hash)
     value = {} of String => BasicObject
     hash.each do |k, v|
-      value[k] = v
+      value[k.to_s] = v
     end
     @result[key] = value
   end
@@ -58,8 +60,16 @@ class Jbuilder
     array!(key, value)
   end
 
+  def set!(key : String, value : Tuple)
+    array!(key, value.to_a)
+  end
+
   def set!(key : String, value : Hash)
     hash!(key, value)
+  end
+
+  def set!(key : String, value : NamedTuple)
+    hash!(key, value.to_h)
   end
 
   def set!(key : String, value : BasicType)
