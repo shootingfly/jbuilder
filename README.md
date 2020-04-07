@@ -89,7 +89,6 @@ https://github.com/shootingfly/kemal-jbuilder-example
   + Support render with layout and child template
 + **v0.2.0**
   + Support Kilt
-  + Support Crystal 0.31.1
 + **v0.1.0**
   + First Release
 
