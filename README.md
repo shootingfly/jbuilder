@@ -84,6 +84,8 @@ Then you can see,
 https://github.com/shootingfly/kemal-jbuilder-example
 
 ## Changelog
++ **1.0.0**
+  + Support Crystal 1.0.0
 + **v0.3.0**
   + Support Tuple and Named Tuple
   + Support render with layout and child template
