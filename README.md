@@ -1,5 +1,6 @@
 # Jbuilder
-[![Build Status](https://travis-ci.org/shootingfly/jbuilder.svg?branch=master)](https://travis-ci.org/shootingfly/jbuilder)[![GitHub release](https://img.shields.io/github/release/shootingfly/jbuilder.svg)](https://github.com/shootingfly/jbuilder/releases)
+[![Crystal CI](https://github.com/shootingfly/jbuilder/actions/workflows/crystal.yml/badge.svg)](https://github.com/shootingfly/jbuilder/actions/workflows/crystal.yml)
+[![GitHub release](https://img.shields.io/github/release/shootingfly/jbuilder.svg)](https://github.com/shootingfly/jbuilder/releases)
 
 Generate JSON objects with a Builder-style DSL, inspired by jbuilder (<https://github.com/rails/jbuilder>)
 
