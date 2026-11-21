@@ -10,7 +10,7 @@ class Jbuilder
   def initialize(@result = Hash(String, BasicObject).new)
   end
 
-  def self.new : Hash
+  def self.new(&) : Hash
     new.tap do |json|
       yield json
     end.to_h
@@ -34,7 +34,7 @@ class Jbuilder
     @result[key] = value
   end
 
-  def array!(key : String, array)
+  def array!(key : String, array, &)
     value = [] of BasicObject
     array.each do |item|
       value << Jbuilder.new do |json|
