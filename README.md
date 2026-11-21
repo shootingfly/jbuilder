@@ -81,6 +81,51 @@ Then you can see,
 }
 ```
 
+## Parsed and nested values
+
+Fields accept `JSON::Any` directly, including parsed objects and arrays. Arrays,
+hashes, tuples and named tuples can mix native values with parsed values at any
+depth. `array!`, `hash!` and `merge!` use the same recursive conversion; null,
+false and numeric types are preserved. Containers are copied when assigned, so
+later source changes do not alter the rendered value.
+
+```crystal
+document = JSON.parse(%({"items":[null,false,{"name":"example"}]}))
+Jbuilder.new do |json|
+  json.document document
+  json.array!("items", document["items"].as_a)
+end
+```
+
+## Partial templates with explicit locals
+
+Register the template directory once at the top level:
+
+```crystal
+Jbuilder.templates "src/views"
+```
+
+A reusable template declares its required local variables on the first line. For example, `src/views/users/profile.jbuilder`:
+
+```crystal
+# locals: user, active
+json.id user.id
+json.name user.name
+json.active active
+```
+
+Call it from an embedded `.jbuilder` template using named locals:
+
+```crystal
+json.user do |json|
+  json.partial! "users/profile", user: user, active: false
+end
+```
+
+`partial!` is a template directive compiled by `Jbuilder.embed`, rather than a runtime file loader. Paths are literal strings relative to the registered directory; the `.jbuilder` suffix is optional. Each partial runs in a separate method on the current builder, with only its declared locals. The caller's local variables remain unchanged. Nested partials must also pass their locals explicitly.
+
+Unknown paths, missing or extra locals, and dynamic paths are reported during compilation. Named expressions are evaluated once; `false` and `nil` are passed unchanged. Templates are compiled into the application, so neither template files nor the build-time compiler are required at runtime. Existing layouts and embedded templates remain supported.
+
 ## An example using Kemal
 https://github.com/shootingfly/kemal-jbuilder-example
 

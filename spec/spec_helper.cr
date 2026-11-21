@@ -17,7 +17,7 @@ struct UserCase
     @age : Int32,
     @is_male : Bool,
     @created_at : Time,
-    @hobbits : Array(String)
+    @hobbits : Array(String),
   )
   end
 end
