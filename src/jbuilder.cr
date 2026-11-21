@@ -29,7 +29,7 @@ class Jbuilder
   def array!(key : String, array)
     value = [] of BasicObject
     array.each do |item|
-      value << item
+      value << native_value(item)
     end
     @result[key] = value
   end
@@ -47,13 +47,14 @@ class Jbuilder
   def hash!(key : String, hash)
     value = {} of String => BasicObject
     hash.each do |k, v|
-      value[k.to_s] = v
+      value[k.to_s] = native_value(v)
     end
     @result[key] = value
   end
 
   def merge!(hash : Hash)
-    @result.merge!(hash)
+    hash.each { |key, value| @result[key.to_s] = native_value(value) }
+    @result
   end
 
   def set!(key : String, value : Array)
@@ -74,6 +75,30 @@ class Jbuilder
 
   def set!(key : String, value : BasicType)
     @result[key] = value
+  end
+
+  def set!(key : String, value : JSON::Any)
+    @result[key] = native_value(value)
+  end
+
+  private def native_value(value : JSON::Any) : BasicObject
+    native_value(value.raw)
+  end
+
+  private def native_value(value : BasicType) : BasicObject
+    value
+  end
+
+  private def native_value(values : Array | Tuple) : BasicObject
+    items = [] of BasicObject
+    values.each { |value| items << native_value(value) }
+    items
+  end
+
+  private def native_value(values : Hash | NamedTuple) : BasicObject
+    fields = {} of String => BasicObject
+    values.each { |key, value| fields[key.to_s] = native_value(value) }
+    fields
   end
 
   def to_h : Hash

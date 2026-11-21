@@ -81,6 +81,22 @@ Then you can see,
 }
 ```
 
+## Parsed and nested values
+
+Fields accept `JSON::Any` directly, including parsed objects and arrays. Arrays,
+hashes, tuples and named tuples can mix native values with parsed values at any
+depth. `array!`, `hash!` and `merge!` use the same recursive conversion; null,
+false and numeric types are preserved. Containers are copied when assigned, so
+later source changes do not alter the rendered value.
+
+```crystal
+document = JSON.parse(%({"items":[null,false,{"name":"example"}]}))
+Jbuilder.new do |json|
+  json.document document
+  json.array!("items", document["items"].as_a)
+end
+```
+
 ## Partial templates with explicit locals
 
 Register the template directory once at the top level:
