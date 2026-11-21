@@ -12,6 +12,7 @@ Generate JSON objects with a Builder-style DSL, inspired by jbuilder (<https://g
    dependencies:
      jbuilder:
        github: shootingfly/jbuilder
+       version: 1.1.0
    ```
 
 2. Run `shards install`
